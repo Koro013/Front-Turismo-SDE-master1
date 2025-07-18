@@ -2,6 +2,7 @@
 require 'db.php';
 $destinos = $pdo->query('SELECT * FROM destinos')->fetchAll();
 $seleccionados = [];
+$ids = [];
 $totalCosto = 0;
 $totalDuracion = 0;
 if (!empty($_POST['destinos'])) {
