@@ -1,7 +1,15 @@
 <?php
 require 'db.php';
-$stmt = $pdo->query('SELECT * FROM destinos');
+$categoria = $_GET['categoria'] ?? '';
+if ($categoria) {
+    $stmt = $pdo->prepare('SELECT * FROM destinos WHERE categoria = ?');
+    $stmt->execute([$categoria]);
+} else {
+    $stmt = $pdo->query('SELECT * FROM destinos');
+}
 $destinos = $stmt->fetchAll();
+$catStmt = $pdo->query('SELECT DISTINCT categoria FROM destinos');
+$categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,15 +39,30 @@ $destinos = $stmt->fetchAll();
   </header>
 
   <main class="container pt-5">
+    <form method="get" class="row mb-4">
+      <div class="col-auto">
+        <select name="categoria" class="form-select">
+          <option value="">Todas las categorías</option>
+          <?php foreach ($categorias as $c): ?>
+          <option value="<?= htmlspecialchars($c) ?>" <?= $c == $categoria ? 'selected' : '' ?>><?= htmlspecialchars($c) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+    </form>
     <section class="row justify-content-start ms-1 me-1">
       <?php foreach ($destinos as $d): ?>
-      <div class="card btn btn-light col-lg-3 p-0 me-lg-3 mb-lg-3 mb-3 col-md-12 tarjeta-destinos">
-        <img src="<?= $d['imagen'] ?>" class="card-img-top tarjeta-imagen" alt="<?= htmlspecialchars($d['nombre']) ?>">
-        <div class="card-body">
-          <p class="card-text fs-3"><?= htmlspecialchars($d['nombre']) ?></p>
-          <p class="roboto-300">Duración: <?= (int)$d['duracion'] ?> min<br>Costo: $<?= number_format($d['costo'],2) ?></p>
+      <a href="destino.php?id=<?= $d['id'] ?>" class="text-decoration-none text-dark col-lg-3 p-0 me-lg-3 mb-lg-3 mb-3 col-md-12">
+        <div class="card btn btn-light h-100">
+          <img src="<?= $d['imagen'] ?>" class="card-img-top tarjeta-imagen" alt="<?= htmlspecialchars($d['nombre']) ?>">
+          <div class="card-body">
+            <p class="card-text fs-3 mb-1"><?= htmlspecialchars($d['nombre']) ?></p>
+            <p class="roboto-300">Duración: <?= (int)$d['duracion'] ?> min<br>Costo: $<?= number_format($d['costo'],2) ?></p>
+          </div>
         </div>
-      </div>
+      </a>
       <?php endforeach; ?>
     </section>
   </main>
