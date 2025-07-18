@@ -1,20 +1,20 @@
 # Turismo Santiago del Estero
 
-Este proyecto contiene una pequeña aplicaci\u00f3n de ejemplo que usa PHP y MySQL para mostrar informaci\u00f3n tur\u00edstica.
+Esta versión utiliza PHP y MySQL para cargar la información de los destinos, los recorridos y el planificador.
 
 ## Base de datos
 
-Se incluye el archivo `oficinaturismorecorridos.sql` que contiene la estructura y datos de ejemplo. Para crear la base de datos ejecute en su servidor MySQL:
+Se incluye el script `schema.sql` con una base de datos de ejemplo. Para crearla ejecute:
 
 ```bash
-mysql -u usuario -p < oficinaturismorecorridos.sql
+mysql -u usuario -p < schema.sql
 ```
 
-Luego actualice las credenciales en `Front-Turismo-SDE-master/db.php`.
+Actualice las credenciales de acceso en `Front-Turismo-SDE-master/db.php`.
 
 ## Dependencias
 
-Para generar el PDF se usa [Dompdf](https://github.com/dompdf/dompdf). Inst\u00e1lelo mediante Composer:
+Para exportar el PDF se usa [Dompdf](https://github.com/dompdf/dompdf). Instálelo mediante Composer:
 
 ```bash
 composer require dompdf/dompdf
@@ -22,5 +22,4 @@ composer require dompdf/dompdf
 
 ## Uso
 
-Abra `index.html` en su navegador y seleccione la tarjeta **Planificador**. Los datos se cargar\u00e1n desde la base de datos y podr\u00e1 exportarlos a PDF.
-
+Abra `destinos.php`, `recorridos.php` o `planificador.php` desde su servidor web. El planificador permite seleccionar destinos, mostrarlos en el mapa y generar un PDF con el tiempo y costo total.
