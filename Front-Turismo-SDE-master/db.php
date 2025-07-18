@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'oficinaturismorecorridos';
+$db   = 'turismo';
 $user = 'tu_usuario';
 $pass = 'tu_contraseña';
 $charset = 'utf8mb4';
