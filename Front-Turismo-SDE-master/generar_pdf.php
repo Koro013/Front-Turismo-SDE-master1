@@ -25,5 +25,6 @@ $html .= '<p>Total costo: $'.number_format($totalCosto,2).'</p>';
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
 $dompdf->render();
-$dompdf->stream('plan.pdf');
+$dompdf->stream('plan.pdf', ['Attachment' => false]);
+exit;
 ?>
