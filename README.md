@@ -14,10 +14,10 @@ Luego actualice las credenciales en `Front-Turismo-SDE-master/db.php`.
 
 ## Dependencias
 
-Para generar el PDF se usa [Dompdf](https://github.com/dompdf/dompdf). Inst\u00e1lelo mediante Composer:
+Para generar el PDF se usa [Dompdf](https://github.com/dompdf/dompdf). Inst\u00e1lelo mediante Composer (los archivos de la librer\u00eda est\u00e1n ignorados en el repositorio):
 
 ```bash
-composer require dompdf/dompdf
+composer install
 ```
 
 ## Uso
